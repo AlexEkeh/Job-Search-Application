@@ -1,35 +1,51 @@
 import { useState } from "react";
-import Wrapper from "./wrapper";
+import { Link, useNavigate } from "react-router-dom";
+import Wrapper from "../wrapper";
+import axios from "axios";
 function SignUp() {
-  const [details, handleDetails] = useState({ category: "Job seeker" });
+  const navigate = useNavigate();
+  const [details, handleDetails] = useState({});
   const getInfo = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     handleDetails({ ...details, [name]: value });
   };
+
+  const createUser = async (e) => {
+    e.preventDefault();
+    const response = await axios.post("user/create", details);
+    if (response.data && details.role === "Recruiter") {
+      localStorage.setItem("user", JSON.stringify(response.data));
+      navigate("/profile", { state: { result: response.data } });
+    } else if (response.data && details.role === "Applicant") {
+      localStorage.setItem("user", JSON.stringify(response.data));
+      navigate("/createresume");
+    }
+  };
+
   return (
     <Wrapper>
       <div className="simple-bg-screen-login">
-        <div className="Loader"></div>
         <div className="wrapper">
           <section className="login-screen-sec">
             <div className="container">
               <div className="login-screen">
-                <a href="index-2.html">
+                <div>
                   <img
                     src="assets/img/logo.png"
                     className="img-responsive"
-                    alt=""
+                    alt="logo"
                   />
-                </a>
-                <form>
+                </div>
+                <form onSubmit={createUser}>
                   <select
-                    name="category"
+                    name="role"
                     className="form-control form-selector"
                     onChange={getInfo}
                     required
                   >
-                    <option>Job seeker</option>
+                    <option>Account type</option>
+                    <option>Applicant</option>
                     <option>Recruiter</option>
                   </select>
                   <br />
@@ -61,7 +77,7 @@ function SignUp() {
                     Sign Up
                   </button>
                   <span className="lowerText">
-                    Have You Account? <a href="#"> Login</a>
+                    Have You Account? <Link to={"/login"}> Login</Link>
                   </span>
                 </form>
               </div>

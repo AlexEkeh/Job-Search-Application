@@ -1,4 +1,9 @@
 function renderDisplay(params) {
+  const apply = (e) => {
+    e.preventDefault();
+    const item = e.target;
+    item.textContent = "Applied";
+  };
   return params.map((company, i) => {
     const {
       type,
@@ -36,11 +41,12 @@ function renderDisplay(params) {
                   <p className="modalContent">{description}</p>
                 </div>
                 <div className="apply-job-form">
-                  <form className="form-inline" method="post">
+                  <form className="form-inline">
                     <div className="col-sm-12">
                       <div className="form-group">
                         <div className="center">
                           <button
+                            onClick={apply}
                             type="button"
                             id="subscribe"
                             className="submit-btn"

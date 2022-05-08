@@ -32,6 +32,16 @@ code {
   background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
     url(../public/assets/img/banner-10.jpg);
 }
+.profile-header-title {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+    url(../public/assets/img/banner-3.jpg);
+}
+.nav-text {
+  color: white;
+  font-weight: 500;
+  font-size: larger;
+  margin-top: 5px;
+}
 .form-selector {
   text-align: center;
   font-weight: 700;
@@ -71,4 +81,7 @@ code {
   margin: 5px;
   color: #35434e;
   background-color: whitesmoke;
+}
+.profile-hight {
+  height: 40vh;
 }

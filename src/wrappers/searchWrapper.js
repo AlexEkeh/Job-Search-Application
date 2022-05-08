@@ -1,33 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Wrapper(props) {
-  const user = localStorage.getItem("user");
-  const NavItem = user ? (
-    <>
-      <li className="nav-text">{JSON.parse(user).name}</li>
-      <li className="left-br">
-        <Link
-          to={"/login"}
-          className="signin"
-          onClick={() => localStorage.removeItem("user")}
-        >
-          Sign Out
-        </Link>
-      </li>
-    </>
-  ) : (
-    <>
-      <li>
-        <Link to={"/signup"}>
-          <i className="fa fa-pencil" aria-hidden="true"></i>SignUp
-        </Link>
-      </li>
-      <li className="left-br">
-        <Link to={"/login"} className="signin">
-          Sign In
-        </Link>
-      </li>
-    </>
-  );
+  const navigate = useNavigate();
   return (
     <>
       <div className="wrapper"></div>
@@ -41,7 +14,7 @@ function Wrapper(props) {
           >
             <i className="fa fa-bars"></i>
           </button>
-          <div className="navbar-header">
+          <div className="navbar-header" onClick={() => navigate(0)}>
             <Link to={"/"} className="navbar-brand">
               <img
                 src="assets/img/logo-white.png"
@@ -61,7 +34,16 @@ function Wrapper(props) {
               data-in="fadeInDown"
               data-out="fadeOutUp"
             >
-              {NavItem}
+              <li>
+                <Link to={"/signup"}>
+                  <i className="fa fa-pencil" aria-hidden="true"></i>SignUp
+                </Link>
+              </li>
+              <li className="left-br">
+                <Link to={"/login"} className="signin">
+                  Sign In
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

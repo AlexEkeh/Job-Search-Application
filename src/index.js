@@ -1,25 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
-import Hero from "./hero";
-import Login from "./login";
-import SignUp from "./signup";
-import Resume from "./resume";
-import CreateJob from "./createjob";
-import JobList from "./joblist";
-import data from "./sampledata";
+import App from "./App.js";
+import axios from "axios";
+axios.defaults.baseURL = "https://decajob-server.herokuapp.com/api/";
 
-ReactDOM.render(
-  <Router>
-    <Routes>
-      <Route path="/" element={<Hero />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/createresume" element={<Resume />} />
-      <Route path="/createjob" element={<CreateJob />} />
-      <Route path="/joblist" element={<JobList data={data} />} />
-    </Routes>
-  </Router>,
-  document.getElementById("root")
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );

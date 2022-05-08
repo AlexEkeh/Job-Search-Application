@@ -34,7 +34,7 @@ function MainInfo() {
                     type="text"
                     className="form-control"
                     placeholder="First Name"
-                    name="firstName"
+                    name="FirstName"
                     onChange={getDetails}
                   />
                 </div>
@@ -81,7 +81,6 @@ function MainInfo() {
 
               <div className="col-md-12 col-sm-12">
                 <textarea
-                  required
                   className="form-control"
                   placeholder="Objective"
                   name="objective"

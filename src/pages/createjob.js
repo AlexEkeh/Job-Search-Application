@@ -1,14 +1,27 @@
 import { useState } from "react";
-import Wrapper from "./wrapper";
+import { useNavigate } from "react-router-dom";
+import Wrapper from "../wrapper";
+import axios from "axios";
 function CreateJob() {
+  const navigate = useNavigate();
+  const user = localStorage.getItem("user");
   const [jobInfo, handleJobInfo] = useState({});
   const getInfo = (e) => {
     const { name, value } = e.target;
     handleJobInfo({ ...jobInfo, [name]: value });
   };
-  const submitForm = (e) => {
+
+  const submitForm = async (e) => {
     e.preventDefault();
-    console.log(jobInfo);
+    if (user) {
+      const { token } = JSON.parse(user);
+      const response = await axios.post("jobs/postjob", jobInfo, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data) {
+        navigate("/profile");
+      }
+    }
   };
   return (
     <Wrapper>
