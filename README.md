@@ -1,1 +1,3 @@
 # week-8-node-SQ010
+
+DECAGON WEEK-8 GROUP PROJECT
